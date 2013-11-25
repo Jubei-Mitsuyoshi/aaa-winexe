@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS=hardening=-all
+export DEB_CFLAGS_MAINT_APPEND=-Wall
+
+SAMBA_LIBDIR=$(shell pkg-config --variable libdir gensec)/samba
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	cd source && ./waf distclean
+
+override_dh_auto_configure:
+	cd source && ./waf configure --prefix=/usr --samba-lib-dirs=$(SAMBA_LIBDIR)
+
+override_dh_auto_build:
+	cd source && ./waf build --verbose
+
+override_dh_auto_install:
+	cd source && ./waf install --destdir $(CURDIR)/debian/winexe

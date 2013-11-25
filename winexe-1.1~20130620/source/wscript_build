@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+bld.program(target='winexesvc32.exe',
+    source='winexesvc_launch.c winexesvc_loop.c',
+    linkflags='-s',
+    lib='userenv',
+    env=bld.all_envs['win32'])
+
+bld.program(target='winexesvc64.exe',
+    source='winexesvc_launch.c winexesvc_loop.c',
+    linkflags='-s',
+    lib='userenv',
+    env=bld.all_envs['win64'])
+
+bld.program(target='bin22c',
+    source='bin22c.c',
+    cflags='')
+
+bld(name="bin22c", rule='${SRC[0].abspath()} winexesvc32_exe ${SRC[1]} > ${TGT} 2>/dev/null',
+    target='winexesvc32_exe.c',
+    source='bin22c winexesvc32.exe')
+
+bld(name="bin22c", rule='${SRC[0].abspath()} winexesvc64_exe ${SRC[1]} > ${TGT} 2>/dev/null',
+    target='winexesvc64_exe.c',
+    source='bin22c winexesvc64.exe')
+
+if not bld.env.DISABLE_SHARED:
+    bld.program(target='winexe',
+        source='winexe.c svcinstall.c async.c winexesvc32_exe.c winexesvc64_exe.c',
+        includes=bld.env.SAMBA_INCS,
+        libpath=bld.env.SAMBA_LIBS,
+        rpath=bld.env.SAMBA_LIBS,
+        lib='popt dcerpc-samba errors cli-ldap',
+        use='TALLOC DCERPC',
+        )
+
+if bld.env.SAMBA_DIR:
+    bld.program(target='winexe-static',
+        source='winexe.c svcinstall.c async.c winexesvc32_exe.c winexesvc64_exe.c',
+        includes=bld.env.SAMBA_DIR + '/bin/default/include/public',
+        cflags='-pthread',
+        linkflags='-pthread',
+        stlibpath=bld.srcnode.abspath() + '/smb_static/build',
+        stlib='smb_static bsd z resolv rt',
+        lib='dl'
+        )
