@@ -12,10 +12,10 @@ Package-List:
  winexe deb net optional
 Checksums-Sha1: 
  032de9416e1c520abb361cb4b8707c124680b477 122873 winexe_1.1~20130620.orig.tar.gz
- 6fe96178eeee80f00a5f2e4ba84fb8c8a6a4e123 3907 winexe_1.1~20130620-kali4aaa1.debian.tar.gz
+ 36ea78f40672a5a9c63c227c1f5f4fd7611a810f 3962 winexe_1.1~20130620-kali4aaa1.debian.tar.gz
 Checksums-Sha256: 
  50a1b80094cf7883fa49223b58f6b4ec27c68ec5785e9b9ca19b99f4ce139593 122873 winexe_1.1~20130620.orig.tar.gz
- d4bec49057a8c26a3006fca7f0c21426b332c062188220f5a3940d27ac37e8c0 3907 winexe_1.1~20130620-kali4aaa1.debian.tar.gz
+ 06c0008430b02d3e96ff7d0af04e78d91343454b2b62d619a4d2f4d8c0a23b65 3962 winexe_1.1~20130620-kali4aaa1.debian.tar.gz
 Files: 
  1e8be17eef675778937266f13b8d72dc 122873 winexe_1.1~20130620.orig.tar.gz
- 4ad248082e6c394c7b236834e0817f3f 3907 winexe_1.1~20130620-kali4aaa1.debian.tar.gz
+ 338b7e366ace09902a9b962594e0610f 3962 winexe_1.1~20130620-kali4aaa1.debian.tar.gz
