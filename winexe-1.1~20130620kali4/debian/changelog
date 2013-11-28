@@ -1,0 +1,38 @@
+winexe (1.1~20130620kali4) kali; urgency=low
+
+  * changed bin2c name in source to try to avoid conflict with same name
+    file from cuda-toolkit
+
+ -- Jubei Mitsuyoshi <jubei.house.of.five.masters@gmail.com>  Mon, 25 Nov 2013 14:15:19 +0100
+
+winexe (1.1~20130620-0kali4) kali-dev; urgency=low
+
+  * Replace python-samba Build-Depends by samba-common-bin which really
+    contains the library required by libsamba-credentials0 in the
+    current version of the samba 4.0 packages.
+  * Enable verbose build logs and add -Wall to CFLAGS.
+  * Add use-pkgconfig patch to use the proper CFLAGS when building
+    winexe against Samba's shared libraries.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Fri, 28 Jun 2013 22:19:33 +0200
+
+winexe (1.1~20130620-0kali3) kali-dev; urgency=low
+
+  * Disable entirely hardening as other options also cause problems.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Thu, 20 Jun 2013 23:03:55 +0200
+
+winexe (1.1~20130620-0kali2) kali-dev; urgency=low
+
+  * Disable "relro" hardening option as /usr/bin/x86_64-w64-mingw32-ld doesn't
+    support the "-Wl,-z,relro" option.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Thu, 20 Jun 2013 22:09:09 +0200
+
+winexe (1.1~20130620-0kali1) kali-dev; urgency=low
+
+  * Initial release.
+  * Add Build-Depends on python-samba to work-around missing dependency on
+    libsamba-credentials0 (see #705908).
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Thu, 20 Jun 2013 15:55:14 +0200

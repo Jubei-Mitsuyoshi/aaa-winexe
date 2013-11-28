@@ -1,0 +1,95 @@
+Description: <short summary of the patch>
+ .Changed name of bin2c to bin22c, to avoid conflict with nvidia-cuda-toolkit
+ winexe (1.1~20130620-0kali4) kali-dev; urgency=low
+ .
+   * Replace python-samba Build-Depends by samba-common-bin which really
+     contains the library required by libsamba-credentials0 in the
+     current version of the samba 4.0 packages.
+   * Enable verbose build logs and add -Wall to CFLAGS.
+   * Add use-pkgconfig patch to use the proper CFLAGS when building
+     winexe against Samba's shared libraries.
+Author: Raphaël Hertzog <hertzog@debian.org>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- /dev/null
++++ winexe-1.1~20130620/source/bin22c.c
+@@ -0,0 +1,41 @@
++/*
++   Copyright (C) Andrzej Hajda 2009
++   Contact: andrzej.hajda@wp.pl
++   License: GNU General Public License version 3
++*/
++
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
++
++int main(int argc, char **argv)
++{
++	char buf[256], s[100];
++	int c;
++	FILE *fp;
++	if (argc != 3) {
++		fprintf(stderr, "Usage: %s varname file\n", *argv);
++		return 1;
++	}
++	if (!(fp = fopen(argv[2], "rb"))) {
++		fputs("Cannot open ", stderr);
++		perror(argv[2]);
++		return 1;
++	}
++	fseek(fp, 0, SEEK_END);
++	long len = ftell(fp);
++	fseek(fp, 0, SEEK_SET);
++	printf("unsigned int %s_len = %lu;\nunsigned char %s[] = {\n", argv[1], len, argv[1]);
++	strcpy(buf, "  ");
++	while ((c = getc(fp)) != EOF) {
++		sprintf(s, "%u,", (unsigned char) c);
++		if (strlen(s) + strlen(buf) >= 80)
++			puts(buf), strcpy(buf, "  ");
++		strcat(buf, s);
++	}
++	if (*buf)
++		strcat(buf, "\n");
++	printf("%s};\n", buf);
++	fprintf(stderr, "%s_len = %lu\n", argv[1], len);
++	return 0;
++}
+--- winexe-1.1~20130620.orig/source/wscript_build
++++ winexe-1.1~20130620/source/wscript_build
+@@ -12,17 +12,17 @@ bld.program(target='winexesvc64.exe',
+     lib='userenv',
+     env=bld.all_envs['win64'])
+ 
+-bld.program(target='bin2c',
+-    source='bin2c.c',
++bld.program(target='bin22c',
++    source='bin22c.c',
+     cflags='')
+ 
+-bld(name="bin2c", rule='${SRC[0].abspath()} winexesvc32_exe ${SRC[1]} > ${TGT} 2>/dev/null',
++bld(name="bin22c", rule='${SRC[0].abspath()} winexesvc32_exe ${SRC[1]} > ${TGT} 2>/dev/null',
+     target='winexesvc32_exe.c',
+-    source='bin2c winexesvc32.exe')
++    source='bin22c winexesvc32.exe')
+ 
+-bld(name="bin2c", rule='${SRC[0].abspath()} winexesvc64_exe ${SRC[1]} > ${TGT} 2>/dev/null',
++bld(name="bin22c", rule='${SRC[0].abspath()} winexesvc64_exe ${SRC[1]} > ${TGT} 2>/dev/null',
+     target='winexesvc64_exe.c',
+-    source='bin2c winexesvc64.exe')
++    source='bin22c winexesvc64.exe')
+ 
+ if not bld.env.DISABLE_SHARED:
+     bld.program(target='winexe',
