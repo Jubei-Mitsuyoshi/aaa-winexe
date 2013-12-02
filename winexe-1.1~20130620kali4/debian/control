@@ -13,7 +13,4 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Remote Windows-command executor
  Winexe remotely executes commands on Windows NT/2000/XP/2003 systems from
  GNU/Linux (and possibly also from other Unices capable of building the Samba 4
- software package).
-. 
-The *aaa versions of this package have had modifications to the source
-code to remedy incompatibilities with nvidia-cuda-toolkit.
+ software package)The *aaa versions of this package have had modifications to the source code to remedy incompatibilities with nvidia-cuda-toolkit..
