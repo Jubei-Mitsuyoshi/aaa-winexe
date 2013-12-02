@@ -1,7 +1,7 @@
 Source: winexe
 Section: net
 Priority: optional
-Maintainer: Raphaël Hertzog <hertzog@debian.org>
+Maintainer: Jubei Mitsuyoshi <jubei.house.of.five.masters@gmail.com>
 Build-Depends: debhelper (>= 9), gcc-mingw-w64, libdcerpc-dev, libpopt-dev, libsamba-credentials-dev, libsamba-util-dev, libsmbclient-raw-dev, libtevent-dev, samba-dev, libtalloc-dev, libgensec-dev, pkg-config, samba-common-bin
 Standards-Version: 3.9.4
 Vcs-Git: git://git.kali.org/packages/winexe.git
@@ -14,3 +14,6 @@ Description: Remote Windows-command executor
  Winexe remotely executes commands on Windows NT/2000/XP/2003 systems from
  GNU/Linux (and possibly also from other Unices capable of building the Samba 4
  software package).
+. 
+The *aaa versions of this package have had modifications to the source
+code to remedy incompatibilities with nvidia-cuda-toolkit.
