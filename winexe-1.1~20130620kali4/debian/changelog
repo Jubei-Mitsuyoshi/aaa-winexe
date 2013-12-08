@@ -1,4 +1,4 @@
-winexe (1.1~20130620kali4) kali; urgency=low
+winexe (1.1~20130620kali4-aaa1) kali; urgency=low
 
   * changed bin2c name in source to try to avoid conflict with same name
     file from cuda-toolkit
